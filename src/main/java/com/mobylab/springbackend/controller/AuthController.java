@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/authproxy")
 public class AuthController implements SecuredRestController{
@@ -21,10 +23,10 @@ public class AuthController implements SecuredRestController{
     @RequestMapping(path ="/register", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody RegisterRequestDto registerRequestDto) {
         logger.info("Request to register user {}", registerRequestDto.getEmail());
-        authService.registerWithoutFamilyId(registerRequestDto);
+        UUID familyId = authService.registerWithoutFamilyId(registerRequestDto);
         logger.info("Successfully registered user {}", registerRequestDto.getEmail());
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(familyId, HttpStatus.OK);
     }
 
     @RequestMapping(path ="/register/family-id", method = RequestMethod.POST)

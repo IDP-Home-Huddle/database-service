@@ -47,7 +47,7 @@ public class UserService {
     }
 
     public List<UserResponseDto> getByFamilyId(UUID familyId) {
-        // TOD0
+        return userRepository.findByFamilyId(familyId).stream().map(this::createDto).toList();
     }
 
     private UserResponseDto createDto(User user) {

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -33,7 +34,7 @@ public class AuthService {
         this.roleRepository = roleRepository;
     }
 
-    public void registerWithoutFamilyId(RegisterRequestDto registerRequestDto) {
+    public UUID registerWithoutFamilyId(RegisterRequestDto registerRequestDto) {
         if (userRepository.existsUserByEmail(registerRequestDto.getEmail())) {
             logger.error("Email already used.");
             throw new AuthException("Email already used.");
@@ -43,15 +44,18 @@ public class AuthService {
         roles.add(roleRepository.findRoleByName(registerRequestDto.getRole()).get());
 
         User user = new User();
+        UUID familyId = UUID.randomUUID();
+
+        user.setFamilyId(familyId);
         user.setEmail(registerRequestDto.getEmail());
         user.setFirstName(registerRequestDto.getFirstName());
         user.setLastName(registerRequestDto.getLastName());
         user.setRoles(roles);
         user.setPassword(registerRequestDto.getPassword());
 
-        // generate new familyId for user
-
         userRepository.save(user);
+
+        return familyId;
     }
 
     public void registerWithFamilyId(RegisterWithFamilyIdRequestDto registerRequestDto) {

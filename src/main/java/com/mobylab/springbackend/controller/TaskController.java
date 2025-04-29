@@ -34,16 +34,6 @@ public class TaskController implements SecuredRestController{
         return ResponseEntity.ok(taskResponseDto);
     }
 
-    @GetMapping("/getByFamilyId")
-    @PreAuthorize("hasAuthority('PARENT') or hasAuthority('CHILD') or hasAuthority('ADMIN')")
-    public ResponseEntity<List<TaskResponseDto>> getByFamilyId(UUID familyId) {
-        logger.info("Request to get task list by familyId {}", familyId);
-        List<TaskResponseDto> taskResponseDtoList = taskService.getByFamilyId(familyId);
-        logger.info("Successfully retrieved task list by familyId {}", familyId);
-
-        return ResponseEntity.ok(taskResponseDtoList);
-    }
-
     @GetMapping("/getByCreatorId")
     @PreAuthorize("hasAuthority('PARENT') or hasAuthority('CHILD') or hasAuthority('ADMIN')")
     public ResponseEntity<List<TaskResponseDto>> getByCreatorId(UUID creatorId) {

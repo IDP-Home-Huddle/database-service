@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface TaskRepository extends JpaRepository<Task, UUID> {
-    void deleteTasksByAssignee(User assignee);
     List<Task> findAllByCreator(User creator);
-    Optional<List<Task>> findAllByAssignee(User assignee);
+    List<Task> findAllByAssignee(User assignee);
 }
