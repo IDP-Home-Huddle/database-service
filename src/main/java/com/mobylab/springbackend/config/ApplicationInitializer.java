@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +21,6 @@ public class ApplicationInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    @Value("${admin.username}")
-    private String adminUsername;
     @Value("${admin.password}")
     private String adminPassword;
     @Value("${admin.email}")
@@ -49,6 +48,8 @@ public class ApplicationInitializer implements CommandLineRunner {
             initAdmin.setEmail(adminEmail);
             initAdmin.setPassword(passwordEncoder.encode(adminPassword));
             initAdmin.setRoles(roleList);
+            initAdmin.setCreatedTasks(Collections.emptyList());
+            initAdmin.setAssignedTasks(Collections.emptyList());
 
             userRepository.save(initAdmin);
         }

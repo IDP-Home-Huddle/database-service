@@ -15,6 +15,6 @@ WORKDIR /app
 
 COPY --from=build /app/target/springbackend-0.0.1-SNAPSHOT.jar app.jar
 
-EXPOSE 8290
+EXPOSE 8193
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
