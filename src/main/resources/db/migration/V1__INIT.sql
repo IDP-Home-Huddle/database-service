@@ -14,9 +14,8 @@ CREATE TABLE project.roles (
 INSERT INTO project.roles (id, name) VALUES
  (1, 'ADMIN'),
  (2, 'USER'),
- (3, 'JUNIOR'),
- (4, 'SENIOR'),
- (5, 'CLIENT');
+ (3, 'PARENT'),
+ (5, 'CHILD');
 
 -- Create table: users
 CREATE TABLE project.users (
