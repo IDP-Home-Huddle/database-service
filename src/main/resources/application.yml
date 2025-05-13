@@ -11,7 +11,7 @@ spring:
         default_schema: project
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show-sql: true
-        ddl-auto: none
+        ddl-auto: update
     open-in-view: false
   flyway:
     enabled: true
