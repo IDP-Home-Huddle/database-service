@@ -21,9 +21,9 @@ INSERT INTO project.roles (id, name) VALUES
 -- Create table: users
 CREATE TABLE project.users (
    id UUID PRIMARY KEY,
-   familyId UUID,
-   firstName VARCHAR(255),
-   lastName VARCHAR(255),
+   family_id UUID,
+   first_name VARCHAR(255),
+   last_name VARCHAR(255),
    email VARCHAR(255),
    password VARCHAR(255)
 );
