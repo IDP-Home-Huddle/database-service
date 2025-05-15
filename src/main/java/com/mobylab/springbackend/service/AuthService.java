@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -27,11 +28,13 @@ public class AuthService {
     private final UserRepository userRepository;
     @Autowired
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
-    public AuthService(UserRepository userRepository, RoleRepository roleRepository) {
+    public AuthService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UUID registerWithoutFamilyId(RegisterRequestDto registerRequestDto) {
@@ -51,7 +54,7 @@ public class AuthService {
         user.setFirstName(registerRequestDto.getFirstName());
         user.setLastName(registerRequestDto.getLastName());
         user.setRoles(roles);
-        user.setPassword(registerRequestDto.getPassword());
+        user.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
 
         userRepository.save(user);
 
@@ -72,7 +75,7 @@ public class AuthService {
         user.setFirstName(registerRequestDto.getFirstName());
         user.setLastName(registerRequestDto.getLastName());
         user.setRoles(roles);
-        user.setPassword(registerRequestDto.getPassword());
+        user.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
         user.setFamilyId(registerRequestDto.getFamilyId());
 
         userRepository.save(user);

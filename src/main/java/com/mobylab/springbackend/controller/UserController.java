@@ -35,7 +35,7 @@ public class UserController implements SecuredRestController{
 
     @GetMapping("/getByEmail")
     @PreAuthorize("hasAuthority('PARENT') or hasAuthority('CHILD') or hasAuthority('ADMIN')")
-    public ResponseEntity<UserResponseDto> getByEmail(String email) {
+    public ResponseEntity<UserResponseDto> getByEmail(@RequestParam String email) {
         logger.info("Request to get user by email {}", email);
         UserResponseDto userResponseDto = userService.getByEmail(email);
         logger.info("Successfully retrieved user by email {}", email);
@@ -45,7 +45,7 @@ public class UserController implements SecuredRestController{
 
     @GetMapping("/getByFamilyId")
     @PreAuthorize("hasAuthority('PARENT') or hasAuthority('CHILD') or hasAuthority('ADMIN')")
-    public ResponseEntity<List<UserResponseDto>> getByFamilyId(UUID familyId) {
+    public ResponseEntity<List<UserResponseDto>> getByFamilyId(@RequestParam UUID familyId) {
         logger.info("Request to get user list by familyId {}", familyId);
         List<UserResponseDto> userResponseDtoList = userService.getByFamilyId(familyId);
         logger.info("Successfully retrieved user list by familyId {}", familyId);

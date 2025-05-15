@@ -5,6 +5,7 @@ import com.mobylab.springbackend.entity.User;
 import com.mobylab.springbackend.exception.entities.UserException;
 import com.mobylab.springbackend.repository.UserRepository;
 import com.mobylab.springbackend.service.dto.entity.user.UserResponseDto;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class UserService {
     @Autowired
     private final UserRepository userRepository;
