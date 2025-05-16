@@ -13,9 +13,8 @@ CREATE TABLE project.roles (
 -- Insert predefined roles
 INSERT INTO project.roles (id, name) VALUES
  (1, 'ADMIN'),
- (2, 'USER'),
- (3, 'PARENT'),
- (5, 'CHILD');
+ (2, 'PARENT'),
+ (3, 'CHILD');
 
 -- Create table: users
 CREATE TABLE project.users (
